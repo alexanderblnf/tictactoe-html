@@ -1,0 +1,46 @@
+@media screen and (max-width: 1223px) {
+    #leader-div {
+        width: 40vw;
+        height: 40vh;
+        position: absolute;
+        top: 20vh;
+        left: 30vw;
+    }
+
+    #padded-div {
+        padding-top: 2vh;
+    }
+}
+
+@media screen and (min-width: 1224px) {
+    #leader-div {
+        width: 30vw;
+        height: 60vh;
+        position: absolute;
+        top: 20vh;
+        left: 35vw;
+    }
+
+    #padded-div {
+        padding-top: 4vh;
+    }
+}
+
+#leader-div {
+    background-color: whitesmoke;
+    box-shadow: 0 0 10px #000000;
+}
+
+#padded-div {
+    width: 100%;
+    height: 100%;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    text-align: center;
+}
+
+#leader-table {
+    width: 100%;
+    height: 50%;
+
+}

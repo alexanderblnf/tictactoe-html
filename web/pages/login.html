@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tic-Tac-Toe Login</title>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="../css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="../css/login.css" media="screen,projection"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto+Slab">
+    <link rel="stylesheet" type="text/css" href="../css/animate.css">
+</head>
+<body>
+<div id="login-page" class="row">
+    <div class="row col-xs-7 col-xs-offset-5 col-md-7 col-md-offset-5 animated wobble">
+        <img src="../img/logo.png" alt="" class="img-responsive" id="login-logo">
+    </div>
+    <div class="row col-xs-12 col-md-12 space-above-3 animated fadeIn">
+        <form class="login-form" id="loginForm">
+            <div class="row">
+                <div class="col-xs-6 col-xs-offset-5 col-md-7 col-md-offset-5" >
+                    <span class="welcome-span space-left-3">Welcome!</span>
+                </div>
+            </div>
+            <div class="row space-above-3">
+                <div class="col-xs-9 col-xs-offset-3 col-md-8 col-md-offset-3">
+                    <div class="col-xs-1 col-md-2"></div>
+                    <i class="material-icons prefix">email</i>
+                    <input class="rounded-inputs responsive-form" id="email-login" type="email" placeholder="Email">
+                </div>
+            </div>
+            <div class="row space-above-2">
+                <div class="col-xs-9 col-xs-offset-3 col-md-8 col-md-offset-3">
+                    <div class="col-xs-1 col-md-2"></div>
+                    <i class="material-icons prefix">lock</i>
+                    <input class="rounded-inputs responsive-form" id="password-login" type="password" placeholder="Password">
+                </div>
+            </div>
+            <div class="row space-above-3">
+                <div class="col-xs-7 col-xs-offset-5">
+                    <div id="remember-me">
+                        <input type="checkbox"/>
+                        <span class="outline-text">Remember me</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row col-xs-8 col-xs-offset-4 col-md-7 col-md-offset-4 space-above-3">
+                <div class="col-xs-7 col-xs-offset-1 col-md-2 col-md-offset-2">
+                    <button type="button" class="btn responsive-btn login-btn" id="login-btn">Login</button>
+                </div>
+
+            </div>
+
+            <div class="row col-xs-12 space-above-3">
+                <div class="col-xs-7 col-xs-offset-4 col-md-7 col-md-offset-4">
+                    <span class="col-xs-5 col-md-4 outline-text bigger"><a href="register.html">Register Now!</a></span>
+                    <span class="col-xs-5 col-xs-offset-1 col-md-4 col-md-offset-0 outline-text bigger"><a href="#">Forgot password?</a></span>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+</body>
+<script src="../js/jquery-3.2.0.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#email-login').val("");
+        $('#password-login').val("");
+    });
+</script>
+</html>

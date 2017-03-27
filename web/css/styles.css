@@ -1,0 +1,180 @@
+.centerDiv {
+    width: 60%;
+    height: 40%;
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 20%;
+    right: 0;
+
+    margin: auto;
+}
+.caret {
+    border-color: transparent !important;
+}
+
+.header
+{
+    position: fixed;
+    top:0;
+    height: 10%;
+    width: 100%;
+}
+#menuId {
+    color: #FFFFFF;
+}
+
+#menuId:hover {
+    color: #191b6b;
+}
+
+#menuParagraph {
+    color: whitesmoke;
+    margin-left: 1%;
+}
+
+#menuParagraph:hover {
+    color: #191b6b;
+}
+
+.parallax-index {
+    /* The image used */
+
+    /* Set a specific height */
+    margin-top: 5px;
+    min-height: 350px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+a {
+    color: whitesmoke;
+}
+
+.home {
+    margin-left:auto;
+    margin-right:5px;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.home:hover {
+    color: #191b6b;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+}
+
+.logoutBtn {
+    cursor: pointer;
+}
+
+#logoutSpan {
+    position: absolute;
+    right: 1%;
+    margin-top: 2%;
+}
+
+.dropdownStyle {
+    color: ghostwhite !important;
+}
+
+.dropdownStyle:hover {
+    color: #191b6b !important;
+}
+
+.circle{
+    margin-left: auto;
+    margin-right: auto;
+    height: 50% !important;
+    width: 50% !important;
+}
+
+.deleteEntry {
+    cursor: pointer;
+    color: deepskyblue;
+}
+
+.deleteEntry:hover {
+   color: red;
+}
+
+.delPrint {
+    cursor: pointer;
+    color: deepskyblue;
+}
+
+.delPrint:hover {
+    color: red;
+}
+
+.menuBtn {
+    cursor: pointer;
+}
+
+.addRoomBtn {
+    margin-left: 3.5vw;
+    color: deepskyblue;
+    cursor: pointer;
+}
+
+.content-room {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.modal {
+    max-height: 30vh !important;
+    width: 45vw !important;
+    top: 40% !important;
+    height: 50vh !important;
+}
+
+.modal-content {
+    background-color: whitesmoke !important;
+}
+#addRoomInput {
+    text-align: center;
+    margin-top: 5vh;
+}
+
+#tableId {
+    margin-left: -25vh;
+}
+
+#tableId_wrapper {
+    margin-left: -25vh;
+    margin-top: -10vh;
+}
+
+.modal-est {
+    max-height: 40vh !important;
+}
+
+.modal-content-est {
+    background-color: white !important;
+}
+
+.deleteRoomBtn {
+    margin-left: 3.5vw;
+    color: darkred;
+    cursor: pointer;
+}
+
+#tablePrint {
+    margin-left: -25vh;
+}
+
+#tablePrint_wrapper {
+    margin-left: -25vh;
+    margin-top: -10vh;
+}

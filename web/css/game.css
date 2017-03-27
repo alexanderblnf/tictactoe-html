@@ -1,0 +1,62 @@
+#game-table {
+    width: 100%;
+    height: 100%;
+    border-collapse: separate;
+    box-shadow: 2px 2px 5px #000000;
+}
+
+@media screen and (max-width: 1223px) {
+    #table-div {
+        width: 60vw;
+        height: 40vh;
+        position: absolute;
+        top: 20vh;
+        left: 20vw;
+    }
+
+    .game-square:focus {
+        background: -moz-radial-gradient(circle, #fe5a5a 0%, #d74c4c 100%); /* FF3.6+ */
+        background: -webkit-gradient(radial, left top, left bottom, color-stop(0%,#fe5a5a), color-stop(100%,#d74c4c)); /* Chrome,Safari4+ */
+        background: -webkit-radial-gradient(circle, #fe5a5a 0%, #d74c4c 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-radial-gradient(circle, #fe5a5a 0%,#d74c4c 100%); /* Opera 11.10+ */
+        background: -ms-radial-gradient(circle, #fe5a5a 0%,#d74c4c 100%); /* IE10+ */
+        background: radial-gradient(circle, #fe5a5a 0%,#d74c4c 100%); /* W3C */
+    }
+}
+
+@media screen and (min-width: 1224px) {
+    #table-div {
+        width: 50vw;
+        height: 60vh;
+        position: absolute;
+        top: 15vh;
+        left: 25vw;
+    }
+
+    .game-square:hover {
+        background: -moz-radial-gradient(circle, #fe5a5a 0%, #d74c4c 100%); /* FF3.6+ */
+        background: -webkit-gradient(radial, left top, left bottom, color-stop(0%,#fe5a5a), color-stop(100%,#d74c4c)); /* Chrome,Safari4+ */
+        background: -webkit-radial-gradient(circle, #fe5a5a 0%, #d74c4c 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-radial-gradient(circle, #fe5a5a 0%,#d74c4c 100%); /* Opera 11.10+ */
+        background: -ms-radial-gradient(circle, #fe5a5a 0%,#d74c4c 100%); /* IE10+ */
+        background: radial-gradient(circle, #fe5a5a 0%,#d74c4c 100%); /* W3C */
+    }
+
+    .game-square:focus {
+        outline: none !important;
+    }
+}
+
+.game-square {
+    width: 100%;
+    height: 100%;
+    /*background-color: #e85353;*/
+    border: 1px solid black;
+
+    background: -moz-radial-gradient(circle, #e85353 0%, #ac4343 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, left top, left bottom, color-stop(0%,#e85353), color-stop(100%,#ac4343)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(circle, #e85353 0%, #ac4343 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(circle, #e85353 0%,#ac4343 100%); /* Opera 11.10+ */
+    background: -ms-radial-gradient(circle, #e85353 0%,#ac4343 100%); /* IE10+ */
+    background: radial-gradient(circle, #e85353 0%,#ac4343 100%); /* W3C */
+}
