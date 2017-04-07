@@ -11,22 +11,34 @@
     <link rel="stylesheet" type="text/css" href="../css/animate.css">
     <link rel="stylesheet" type="text/css" href="../css/game.css">
     <link rel="stylesheet" type="text/css" href="../css/leaderboard.css">
+    <link rel="stylesheet" type="text/css" href="../css/admin.css">
 </head>
 <body>
 <header>
-    <div class="col-xs-3 col-md-2 whole-height">
-        <span class="helper"></span><a href="index.html"><img id="logo" src="../img/logo.png"></a>
-        <span id="logo-text">Tic</span>
-    </div>
-    <div class="col-xs-7 col-md-5 col-xs-offset-0 col-md-offset-1 helper" id="menu-div">
-        <div class="col-xs-6 whole-height align-div">
-            <button class="btn whole-button" id="play-btn">Play</button>
-        </div>
-        <div class="col-xs-6 whole-height align-div">
-            <button class="btn whole-button" id="leader-btn">Leaderboard</button>
-        </div>
+    <div id="logo-div">
+        <a href="index.html"><img id="logo" src="../img/logo.png"></a>
     </div>
 </header>
+<div id="menuBar-div">
+
+    <div class="bar-divs" id="text-div">
+        <span id="logo-text">Tic</span>
+    </div>
+    <div class="bar-divs" id="menu-div">
+        <div class="btn-divs" id="play-div">
+            <button class="btn whole-button" id="play-btn">Play</button>
+        </div>
+        <div class="btn-divs" id="leaderboard-div">
+            <button class="btn whole-button" id="leader-btn">Leaderboard</button>
+        </div>
+        <div class="btn-divs" id="admin-div">
+            <button class="btn whole-button" id="admin-btn">Manage users</button>
+        </div>
+    </div>
+</div>
+<div id="menuButton-div">
+    <button class="btn" id="menu-button"><i class="material-icons" id="menu-label">menu</i></button>
+</div>
 <div id="container-div">
     <div class="description-strip">
         <div id="desc-title">
@@ -64,4 +76,5 @@
 </body>
 <script src="../js/jquery-3.2.0.js"></script>
 <script src="../js/index.js"></script>
+<script src="../js/render-table.js"></script>
 </html>

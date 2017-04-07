@@ -1,14 +1,14 @@
 @media screen and (max-width: 1223px) {
     #leader-div {
-        width: 40vw;
+        width: 50vw;
         height: 40vh;
         position: absolute;
         top: 20vh;
-        left: 30vw;
+        left: 0;
     }
 
     #padded-div {
-        padding-top: 2vh;
+        padding-top: 3vh;
     }
 }
 
@@ -17,12 +17,12 @@
         width: 30vw;
         height: 60vh;
         position: absolute;
-        top: 20vh;
-        left: 35vw;
+        top: 5vh;
+        left: 15vw;
     }
 
     #padded-div {
-        padding-top: 4vh;
+        padding-top: 6vh;
     }
 }
 
@@ -43,4 +43,20 @@
     width: 100%;
     height: 50%;
 
+}
+
+#player-div {
+    padding-top: 15%;
+}
+
+th, table, td {
+    text-align: center;
+}
+
+th {
+    padding-bottom: 5%;
+}
+
+.leader-head {
+    font-weight: 700;
 }

@@ -7,11 +7,11 @@
 
 @media screen and (max-width: 1223px) {
     #table-div {
-        width: 60vw;
+        width: 55vw;
         height: 40vh;
         position: absolute;
-        top: 20vh;
-        left: 20vw;
+        top: 25vh;
+        left: 0;
     }
 
     .game-square:focus {
@@ -29,8 +29,8 @@
         width: 50vw;
         height: 60vh;
         position: absolute;
-        top: 15vh;
-        left: 25vw;
+        top: 17vh;
+        left: 8vw;
     }
 
     .game-square:hover {
