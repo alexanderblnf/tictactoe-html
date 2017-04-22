@@ -1,0 +1,12 @@
+{
+  "require": {
+    "propel/propel": "~2.0@dev",
+    "cboden/ratchet": "0.3.*"
+  },
+  "autoload": {
+    "psr-0": {
+      "MyApp": "./server/"
+    },
+    "classmap": ["server/"]
+  }
+}

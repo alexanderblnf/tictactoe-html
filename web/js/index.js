@@ -1,5 +1,5 @@
 $('#play-btn').on('click', function () {
-   $('#container-div').empty().load('game.html');
+   $('#container-div').empty().load('game.php');
 });
 
 $('#leader-btn').on('click', function () {

@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['user'])) {
+        header("Location: login.html");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,9 +21,13 @@
     <link rel="stylesheet" type="text/css" href="../css/admin.css">
 </head>
 <body>
+<div id="available-div">
+    <ul id="available-list">
+    </ul>
+</div>
 <header>
     <div id="logo-div">
-        <a href="index.html"><img id="logo" src="../img/logo.png"></a>
+        <a href="index.php"><img id="logo" src="../img/logo.png"></a>
     </div>
 </header>
 <div id="menuBar-div">
@@ -77,4 +88,5 @@
 <script src="../js/jquery-3.2.0.js"></script>
 <script src="../js/index.js"></script>
 <script src="../js/render-table.js"></script>
+<script src="../js/game.js"></script>
 </html>
