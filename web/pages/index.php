@@ -29,6 +29,12 @@
     <div id="logo-div">
         <a href="index.php"><img id="logo" src="../img/logo.png"></a>
     </div>
+    <div id="logout-div">
+        <button id="logout-btn" class="btn">
+            <i class="material-icons">power_settings_new</i>
+        </button>
+
+    </div>
 </header>
 <div id="menuBar-div">
 

@@ -221,3 +221,13 @@ header {
     margin-top: 10%;
     margin-bottom: 10%;
 }
+
+#logout-div {
+    align-self: center;
+    position: absolute;
+    right: 2vw;
+}
+
+#logout-btn {
+    background-color: transparent;
+}

@@ -3,6 +3,7 @@ function render_table() {
         var row = document.createElement('tr');
         for(var j = 0; j < 5; j++) {
             var td = document.createElement('td');
+            td.className='game-td';
             var div = document.createElement('div');
             div.id = 'div' + (5 * i + j);
             div.className = "button-div";

@@ -19,6 +19,7 @@ $('#login-btn').on('click', function () {
 
         request.done(function (response, textStatus) {
             var data = JSON.parse(response);
+            console.log(data);
             if(data.msg == 'true') {
                 window.location.href = 'index.php';
             }

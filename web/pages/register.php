@@ -8,7 +8,7 @@ if(isset($_POST['email']) && isset($_POST['password']) && isset($_POST['firstnam
     $utils = new UserUtils();
 
     if($utils->signup($_POST['email'], $_POST['password'], $_POST['firstname'], $_POST['lastname'])) {
-        $response = array('msg' => 'true');
+        $response = array('msg' => 'success');
     } else {
         $response = array('msg' => 'fail');
     }

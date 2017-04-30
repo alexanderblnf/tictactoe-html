@@ -47,6 +47,8 @@ class Chat implements MessageComponentInterface
 
         $message['value'] = 'lose';
         $this->users[$opponent]->send(json_encode($message));
+        $this->onClose($from);
+        $this->onClose($this->users[$opponent]);
     }
 
     private function assessLateral($i, $limit, $username, $side, $increment) {
@@ -125,40 +127,42 @@ class Chat implements MessageComponentInterface
 
             if($this->assessLateral($index, $limit, $username, $side, 1)) {
                 $this->decideWin($from);
-                return;
+                return -1;
             }
 
             $limit = 20 + $i;
 
             if($this->assessLateral($i, $limit, $username, $side, 5)) {
                 $this->decideWin($from);
-                return;
+                return -1;
             }
 
             if($this->assessDiagonalLeft($i, $username, $side)) {
                 $this->decideWin($from);
-                return;
+                return -1;
             }
 
             if($this->assessDiagonalRight($i, $username, $side)) {
                 $this->decideWin($from);
-                return;
+                return -1;
             }
         }
 
         foreach ($this->leftCase as $i) {
             if($this->assessDiagonalRight($i, $username, $side)) {
                 $this->decideWin($from);
-                return;
+                return -1;
             }
         }
 
         foreach ($this->rightCase as $i) {
             if($this->assessDiagonalLeft($i, $username, $side)) {
                 $this->decideWin($from);
-                return;
+                return -1;
             }
         }
+
+        return 0;
     }
 
     private function sendMessage($from, $data)
@@ -174,6 +178,13 @@ class Chat implements MessageComponentInterface
                 break;
             }
         }
+    }
+
+    private function sendTurn($from, $username) {
+        $message = array(
+            'type' => 'turn',
+            'username' => $username);
+        $from->send(json_encode($message));
     }
 
     public function onMessage(ConnectionInterface $from, $msg)
@@ -218,6 +229,8 @@ class Chat implements MessageComponentInterface
                         $message['side'] = 'o';
                         $opponent = $this->users[$key];
                         $opponent->send(json_encode($message));
+                        $this->sendTurn($from, $myUsername);
+                        $this->sendTurn($opponent, $myUsername);
                         $this->pairs[$myUsername] = $key;
                         $this->pairs[$key] = $myUsername;
                         $this->side[$from->resourceId] = 'x';
@@ -232,22 +245,29 @@ class Chat implements MessageComponentInterface
             case "move":
 
                 $side = $this->side[$from->resourceId];
+                $user = $this->lookup[$from->resourceId];
+                $opponent = $this->pairs[$user];
                 if ($side == 'x') {
-                    $user = $this->lookup[$from->resourceId];
+                    $aux = $user;
                     $otherSide = 'o';
                 } else {
-                    $user = $this->pairs[$this->lookup[$from->resourceId]];
+                    $aux = $opponent;
                     $otherSide = 'x';
                 }
 
-                if($this->last[$user] == $side){
+                if($this->last[$aux] == $side){
                     $index = $data->message;
                     if($index >= 0 && $index < 25){
-                        if ($this->table[$user][$index] == '-') {
+                        if ($this->table[$aux][$index] == '-') {
                             $this->sendMessage($from, $data);
-                            $this->table[$user][$index] = $this->side[$from->resourceId];
-                            $this->verifyWin($from);
-                            $this->last[$user] = $otherSide;
+                            $this->table[$aux][$index] = $this->side[$from->resourceId];
+                            $done = $this->verifyWin($from);
+                            if($done == 0){
+                                $this->last[$aux] = $otherSide;
+                                $this->sendTurn($this->users[$opponent], $opponent);
+                                $this->sendTurn($this->users[$user], $opponent);
+                            }
+
                         }
                     }
                 }

@@ -10,6 +10,20 @@ $('#admin-btn').on('click', function () {
     $('#container-div').empty().load('admin.html');
 });
 
+$('#logout-btn').on('click', function () {
+    var request = $.ajax({
+        url: 'logout.php',
+        type: 'get'
+    });
+
+    request.done(function (response, textStatus) {
+        window.location.href = "login.html"
+    });
+
+    request.fail(function (jqXHR, textStatus, errorThrown) {
+    });
+});
+
 $('#menu-button').on('click', function (e) {
    var width = $('#menuBar-div').width();
     e.stopPropagation();

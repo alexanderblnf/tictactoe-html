@@ -79,6 +79,13 @@ function createSocket() {
             $('#available-div').hide();
         } else if(data.type == 'end') {
             alert(data.value);
+        } else if(data.type == 'turn') {
+            console.log(data.username);
+            if(username == data.username) {
+                $('#turn-span').text("Your turn!")
+            } else {
+                $('#turn-span').text("Your opponent's turn!")
+            }
         } else {
             console.log('Something went wrong');
         }
