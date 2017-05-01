@@ -1,0 +1,40 @@
+<div id="chat-container">
+    <div id="chat-header">
+
+    </div>
+    <div id="chat-content">
+
+    </div>
+    <div id="message-div">
+        <div id="input-chat">
+            <form>
+                <input id="message-input" type="text" placeholder="Type a message.." style="width: 100%;">
+            </form>
+        </div>
+        <div id="button-chat">
+            <button class="btn" id="send-btn">Send</button>
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var data = {
+            type: 'retrieve-chat'
+        };
+        conn.send(JSON.stringify(data));
+    });
+
+    $('#send-btn').on('click', function () {
+        var message = $('#message-input').val();
+        if(message != null && message != "") {
+            var data = {
+                type: 'chat-message',
+                message: message
+            };
+            conn.send(JSON.stringify(data));
+        }
+    });
+</script>

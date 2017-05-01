@@ -1,6 +1,3 @@
-<?php
-    session_start();
-?>
 <div id="turn-div">
     <span id="turn-span"></span>
 </div>

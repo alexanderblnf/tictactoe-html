@@ -90,7 +90,7 @@
     position: absolute;
     top: 0;
     background-color: white;
-    opacity: 0.8;
+    opacity: 0.9;
     z-index: 1000;
     display: none;
     align-items: center;
@@ -111,4 +111,9 @@
     left: 30%;
     font-size: 2em;
     height: 10vh;
+}
+
+.request-play {
+    margin-left: 2vw;
+    color: black !important;
 }

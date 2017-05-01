@@ -21,7 +21,7 @@ function getSession(callback) {
 }
 
 function createSocket() {
-    conn = new WebSocket('ws://localhost:8081');
+    conn = new WebSocket('ws://192.168.0.101:8081');
     conn.onopen = function (e) {
         console.log("Connection established!");
         var data = {
@@ -86,6 +86,17 @@ function createSocket() {
             } else {
                 $('#turn-span').text("Your opponent's turn!")
             }
+        } else if(data.type == 'retrieve-chat'){
+            var array = data.array;
+            array.forEach(function (val) {
+                var span = '<span class="text-message">' + val["user"] + ": " + val["message"] + '</span><br>';
+                console.log(span);
+                $('#chat-content').append(span);
+            });
+        } else if(data.type == 'chat-message') {
+            console.log('Chat message');
+            var span = '<span class="text-message">' + data["user"] + ": " + data["message"] + '</span><br>';
+            $('#chat-content').append(span);
         } else {
             console.log('Something went wrong');
         }
@@ -122,6 +133,8 @@ $(document).on('click', '.request-play', function () {
         username: player
     };
     conn.send(JSON.stringify(data));
+
+    $('#loading-div').empty().load('loading-animation.html');
 });
 
 function getAvailable() {
@@ -143,7 +156,7 @@ function showAvailable(availableUsers) {
             var play = document.createElement('button');
             play.innerHTML = 'play';
             play.id = 'play' + it;
-            play.className = 'request-play';
+            play.className = 'btn btn-success request-play';
             li.appendChild(span);
             li.appendChild(play);
             ul.appendChild(li);

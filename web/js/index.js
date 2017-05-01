@@ -10,6 +10,10 @@ $('#admin-btn').on('click', function () {
     $('#container-div').empty().load('admin.html');
 });
 
+$('#chat-btn').on('click', function () {
+    $('#container-div').empty().load('chat.html');
+});
+
 $('#logout-btn').on('click', function () {
     var request = $.ajax({
         url: 'logout.php',

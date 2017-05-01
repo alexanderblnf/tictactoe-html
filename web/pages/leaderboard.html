@@ -12,41 +12,53 @@
             <tr>
                 <th>Position</th>
                 <th>Name</th>
+                <th>Points</th>
                 <th>Wins</th>
+                <th>Draw</th>
+                <th>Lose</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <td><i class="material-icons">looks_one</i></td>
-                <td>Tic Master</td>
-                <td>1000000</td>
-            </tr>
-            <tr>
-                <td><i class="material-icons">looks_two</i></td>
-                <td>Runner-up</td>
-                <td>100</td>
-            </tr>
-            <tr>
-                <td><i class="material-icons">looks_3</i></td>
-                <td>Nice guy</td>
-                <td>90</td>
-            </tr>
-            <tr>
-                <td><i class="material-icons">looks_4</i></td>
-                <td>Other guy</td>
-                <td>65</td>
-            </tr>
-            <tr>
-                <td><i class="material-icons">looks_5</i></td>
-                <td>Other Other guy</td>
-                <td>35</td>
-            </tr>
+            <tbody id="leader-body">
             </tbody>
         </table>
         <div id="player-div">
-            <span>Your position: 7</span>
+            <span id="position-span"></span>
         </div>
     </div>
 </div>
 </body>
+<script>
+    $(document).ready(function () {
+        var request = $.ajax({
+            url: 'leaderboard.php',
+            type: 'get',
+            data: {}
+        });
+
+        request.done(function (resp) {
+            var data = JSON.parse(resp);
+            var tbody = document.getElementById("leader-body");
+            data.forEach(function (val, index) {
+                var tr = document.createElement('tr');
+                var keys = Object.keys(val);
+                if (val['this'] == true) {
+                    $('#position-span').text('Your position: ' + (index + 1));
+                }
+                keys.forEach(function (key) {
+                    if(key != 'this'){
+                        var td = document.createElement('td');
+                        td.innerHTML = val[key];
+                        tr.appendChild(td);
+                    }
+
+                });
+                tbody.appendChild(tr);
+            });
+        });
+
+        request.fail(function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus + ' ' + errorThrown);
+        });
+    });
+</script>
 </html>

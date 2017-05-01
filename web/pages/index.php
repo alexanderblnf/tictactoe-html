@@ -19,11 +19,21 @@
     <link rel="stylesheet" type="text/css" href="../css/game.css">
     <link rel="stylesheet" type="text/css" href="../css/leaderboard.css">
     <link rel="stylesheet" type="text/css" href="../css/admin.css">
+    <link rel="stylesheet" type="text/css" href="../css/loading-animation.css">
+    <link rel="stylesheet" type="text/css" href="../css/chat.css">
 </head>
 <body>
 <div id="available-div">
-    <ul id="available-list">
-    </ul>
+    <div id="available-span-div">
+        <span>Available users</span>
+    </div>
+    <div id="list-div">
+        <ul id="available-list">
+        </ul>
+    </div>
+    <div id="loading-div">
+
+    </div>
 </div>
 <header>
     <div id="logo-div">
@@ -50,6 +60,9 @@
         </div>
         <div class="btn-divs" id="admin-div">
             <button class="btn whole-button" id="admin-btn">Manage users</button>
+        </div>
+        <div class="btn-divs" id="chat-div">
+            <button class="btn whole-button" id="chat-btn">Chat Room</button>
         </div>
     </div>
 </div>

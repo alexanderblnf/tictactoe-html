@@ -9,39 +9,82 @@
     <div id="padded-div">
         <table id="admin-table">
             <thead class="leader-head">
-            <td>E-mail</td>
-            <td>Wins</td>
-            <td>Ban</td>
+            <tr>
+                <th>E-mail</th>
+                <th>Name</th>
+                <th>Admin</th>
+                <th>Ban</th>
+            </tr>
             </thead>
-            <tbody>
-            <tr>
-                <td>ticmaster@gmail.com</td>
-                <td>1000000</td>
-                <td><i class="material-icons">delete</i></td>
-            </tr>
-            <tr>
-                <td>Runner-up@yahoo.com</td>
-                <td>100</td>
-                <td><i class="material-icons">delete</i></td>
-            </tr>
-            <tr>
-                <td>NiceGuy@hotmail.com</td>
-                <td>90</td>
-                <td><i class="material-icons">delete</i></td>
-            </tr>
-            <tr>
-                <td>Otherguy@gmail.co.uk</td>
-                <td>65</td>
-                <td><i class="material-icons">delete</i></td>
-            </tr>
-            <tr>
-                <td>OtherOtherguy@gmail.ro</td>
-                <td>35</td>
-                <td><i class="material-icons">delete</i></td>
-            </tr>
+            <tbody id="admin-body">
             </tbody>
         </table>
     </div>
 </div>
 </body>
+<script>
+    $(document).ready(function () {
+        var request = $.ajax({
+            url: 'admin.php',
+            type: 'get',
+            data: {}
+        });
+
+        request.done(function (resp) {
+            var data = JSON.parse(resp);
+            if (data.error != null) {
+
+            } else {
+                var tbody = document.getElementById("admin-body");
+                data.forEach(function (val, index) {
+                    var tr = document.createElement('tr');
+                    var keys = Object.keys(val);
+                    keys.forEach(function (key) {
+                        if (key != 'id') {
+                            var td = document.createElement('td');
+                            td.innerHTML = val[key];
+                            tr.appendChild(td);
+                        }
+
+                    });
+                    var td = document.createElement('td');
+                    td.innerHTML = '<button id="del' + val['id'] + '" class="del-btn btn"><i class="material-icons">delete</i></button>'
+                    tr.appendChild(td);
+                    tbody.appendChild(tr);
+                });
+            }
+
+        });
+
+        request.fail(function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus + ' ' + errorThrown);
+        });
+    });
+
+    $(document).on('click', '.del-btn', function () {
+        var id = $(this)[0].id;
+        id = id.substr(3, id.length - 1);
+        var data = {
+            id: id
+        };
+        var request = $.ajax({
+            url: 'admin.php',
+            type: 'post',
+            data: data
+        });
+
+        request.done(function (resp) {
+            var data = JSON.parse(resp);
+            if(data.success){
+                location.reload();
+            } else {
+                console.log(data.error);
+            }
+        });
+
+        request.fail(function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus + ' ' + errorThrown);
+        });
+    });
+</script>
 </html>

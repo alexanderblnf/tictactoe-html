@@ -12,10 +12,12 @@ class Chat implements MessageComponentInterface
     protected $side, $last;
     private $leftLimit = [0, 5, 10, 15, 20];
     private $rightLimit = [4, 9, 14, 19, 24];
-    private $leftCase = [5, 10];
-    private $rightCase = [9, 14];
+    private $leftCase = [5];
+    private $rightCase = [9];
+    private $userUtils;
+    private $chat;
 
-    public function __construct()
+    public function __construct($userUtils)
     {
         $this->clients = new \SplObjectStorage;
         $this->users = array();
@@ -25,6 +27,8 @@ class Chat implements MessageComponentInterface
         $this->table = array();
         $this->side = array();
         $this->last = array();
+        $this->userUtils = $userUtils;
+        $this->chat = array();
     }
 
     public function onOpen(ConnectionInterface $conn)
@@ -35,23 +39,46 @@ class Chat implements MessageComponentInterface
         echo "New connection! ({$conn->resourceId})\n";
     }
 
-    private function decideWin($from)
+    private function decideDraw($from)
     {
         $message = array(
             'type' => 'end',
-            'value' => 'win'
+            'value' => 'draw'
         );
+
         $from->send(json_encode($message));
         $username = $this->lookup[$from->resourceId];
         $opponent = $this->pairs[$username];
 
+        $this->userUtils->draw($username);
+        $this->userUtils->draw($opponent);
+        $this->users[$opponent]->send(json_encode($message));
+        $this->onClose($from);
+        $this->onClose($this->users[$opponent]);
+    }
+
+    private function decideWin($from)
+    {
+
+        $message = array(
+            'type' => 'end',
+            'value' => 'win'
+        );
+
+        $from->send(json_encode($message));
+        $username = $this->lookup[$from->resourceId];
+        $opponent = $this->pairs[$username];
+
+        $this->userUtils->winner($username);
+        $this->userUtils->loser($opponent);
         $message['value'] = 'lose';
         $this->users[$opponent]->send(json_encode($message));
         $this->onClose($from);
         $this->onClose($this->users[$opponent]);
     }
 
-    private function assessLateral($i, $limit, $username, $side, $increment) {
+    private function assessLateral($i, $limit, $username, $side, $increment)
+    {
         $sum = 0;
         for ($j = $i; $j < $limit; $j += $increment) {
             if ($this->table[$username][$j] == $side) {
@@ -59,7 +86,7 @@ class Chat implements MessageComponentInterface
             } else {
                 $sum = 0;
             }
-            if ($sum == 3) {
+            if ($sum == 4) {
                 return 1;
             }
         }
@@ -67,19 +94,20 @@ class Chat implements MessageComponentInterface
         return 0;
     }
 
-    private function assessDiagonalRight($i, $username, $side) {
+    private function assessDiagonalRight($i, $username, $side)
+    {
         $sum = 0;
-        if(!in_array($i, $this->rightLimit)) {
-            for($j = $i; $j < 25; $j += 6) {
+        if (!in_array($i, $this->rightLimit)) {
+            for ($j = $i; $j < 25; $j += 6) {
                 if ($this->table[$username][$j] == $side) {
                     $sum++;
                 } else {
                     $sum = 0;
                 }
-                if ($sum == 3) {
+                if ($sum == 4) {
                     return 1;
                 }
-                if(in_array($j, $this->rightLimit)) {
+                if (in_array($j, $this->rightLimit)) {
                     return 0;
                 }
             }
@@ -88,19 +116,20 @@ class Chat implements MessageComponentInterface
         return 0;
     }
 
-    private function assessDiagonalLeft($i, $username, $side) {
+    private function assessDiagonalLeft($i, $username, $side)
+    {
         $sum = 0;
-        if(!in_array($i, $this->leftLimit)) {
-            for($j = $i; $j <= 20; $j += 4) {
+        if (!in_array($i, $this->leftLimit)) {
+            for ($j = $i; $j <= 20; $j += 4) {
                 if ($this->table[$username][$j] == $side) {
                     $sum++;
                 } else {
                     $sum = 0;
                 }
-                if ($sum == 3) {
+                if ($sum == 4) {
                     return 1;
                 }
-                if(in_array($j, $this->leftLimit)) {
+                if (in_array($j, $this->leftLimit)) {
                     return 0;
                 }
             }
@@ -113,9 +142,9 @@ class Chat implements MessageComponentInterface
     {
         $side = $this->side[$from->resourceId];
         $username = "";
-        if($side == 'x') {
+        if ($side == 'x') {
             $username = $this->lookup[$from->resourceId];
-        } else if($side == 'o') {
+        } else if ($side == 'o') {
             $username = $this->pairs[$this->lookup[$from->resourceId]];
         }
 
@@ -125,44 +154,56 @@ class Chat implements MessageComponentInterface
             $index = 5 * $i;
             $limit = 5 * ($i + 1);
 
-            if($this->assessLateral($index, $limit, $username, $side, 1)) {
+            if ($this->assessLateral($index, $limit, $username, $side, 1)) {
                 $this->decideWin($from);
                 return -1;
             }
 
             $limit = 20 + $i;
 
-            if($this->assessLateral($i, $limit, $username, $side, 5)) {
+            if ($this->assessLateral($i, $limit, $username, $side, 5)) {
                 $this->decideWin($from);
                 return -1;
             }
 
-            if($this->assessDiagonalLeft($i, $username, $side)) {
+            if ($this->assessDiagonalLeft($i, $username, $side)) {
                 $this->decideWin($from);
                 return -1;
             }
 
-            if($this->assessDiagonalRight($i, $username, $side)) {
+            if ($this->assessDiagonalRight($i, $username, $side)) {
                 $this->decideWin($from);
                 return -1;
             }
         }
 
         foreach ($this->leftCase as $i) {
-            if($this->assessDiagonalRight($i, $username, $side)) {
+            if ($this->assessDiagonalRight($i, $username, $side)) {
                 $this->decideWin($from);
                 return -1;
             }
         }
 
         foreach ($this->rightCase as $i) {
-            if($this->assessDiagonalLeft($i, $username, $side)) {
+            if ($this->assessDiagonalLeft($i, $username, $side)) {
                 $this->decideWin($from);
                 return -1;
             }
         }
 
         return 0;
+    }
+
+    private function verifyDraw($user)
+    {
+        $draw = 1;
+        for ($i = 0; $i < 25; $i++) {
+            if ($this->table[$user][$i] == '-') {
+                $draw = 0;
+                break;
+            }
+        }
+        return $draw;
     }
 
     private function sendMessage($from, $data)
@@ -180,7 +221,8 @@ class Chat implements MessageComponentInterface
         }
     }
 
-    private function sendTurn($from, $username) {
+    private function sendTurn($from, $username)
+    {
         $message = array(
             'type' => 'turn',
             'username' => $username);
@@ -196,6 +238,30 @@ class Chat implements MessageComponentInterface
                 echo "Subscribe message received" . "\n";
                 $this->users[$data->username] = $from;
                 $this->lookup[$from->resourceId] = $data->username;
+                break;
+            case "retrieve-chat":
+                echo "Retrieve chat message received" . "\n";
+                $response = array(
+                    "type" => "retrieve-chat",
+                    "array" => $this->chat
+                );
+                $from->send(json_encode($response));
+                break;
+            case "chat-message":
+                echo "Chat message received" . "\n";
+                $aux = array(
+                    "type" => "chat-message",
+                    "user" => $this->lookup[$from->resourceId],
+                    "message" => $data->message
+                );
+                foreach ($this->users as $user) {
+                    $user->send(json_encode($aux));
+                }
+                $aux2 = array(
+                    "user" => $aux['user'],
+                    "message" => $aux['message']
+                );
+                array_push($this->chat, $aux2);
                 break;
             case "available":
                 echo "Available message received" . "\n";
@@ -243,31 +309,37 @@ class Chat implements MessageComponentInterface
                 }
                 break;
             case "move":
+                if($this->side[$from->resourceId] != null) {
+                    $side = $this->side[$from->resourceId];
+                    $user = $this->lookup[$from->resourceId];
+                    $opponent = $this->pairs[$user];
+                    if ($side == 'x') {
+                        $aux = $user;
+                        $otherSide = 'o';
+                    } else {
+                        $aux = $opponent;
+                        $otherSide = 'x';
+                    }
 
-                $side = $this->side[$from->resourceId];
-                $user = $this->lookup[$from->resourceId];
-                $opponent = $this->pairs[$user];
-                if ($side == 'x') {
-                    $aux = $user;
-                    $otherSide = 'o';
-                } else {
-                    $aux = $opponent;
-                    $otherSide = 'x';
-                }
+                    if ($this->last[$aux] == $side) {
+                        $index = $data->message;
+                        if ($index >= 0 && $index < 25) {
+                            if ($this->table[$aux][$index] == '-') {
+                                $this->sendMessage($from, $data);
+                                $this->table[$aux][$index] = $this->side[$from->resourceId];
+                                $done = $this->verifyWin($from);
+                                if ($done == 0) {
+                                    $draw = $this->verifyDraw($aux);
+                                    if(!$draw) {
+                                        $this->last[$aux] = $otherSide;
+                                        $this->sendTurn($this->users[$opponent], $opponent);
+                                        $this->sendTurn($this->users[$user], $opponent);
+                                    } else {
+                                        $this->decideDraw($from);
+                                    }
+                                }
 
-                if($this->last[$aux] == $side){
-                    $index = $data->message;
-                    if($index >= 0 && $index < 25){
-                        if ($this->table[$aux][$index] == '-') {
-                            $this->sendMessage($from, $data);
-                            $this->table[$aux][$index] = $this->side[$from->resourceId];
-                            $done = $this->verifyWin($from);
-                            if($done == 0){
-                                $this->last[$aux] = $otherSide;
-                                $this->sendTurn($this->users[$opponent], $opponent);
-                                $this->sendTurn($this->users[$user], $opponent);
                             }
-
                         }
                     }
                 }
