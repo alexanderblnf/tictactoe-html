@@ -8,14 +8,17 @@ if(isset($_POST['email']) && isset($_POST['password'])) {
 
     $utils = new UserUtils();
 
-    if($utils->verifyLogin($_POST['email'], $_POST['password'])) {
+    $login = $utils->verifyLogin($_POST['email'], $_POST['password']);
+    if($login == 1) {
         $response = array('msg' => 'true');
         $_SESSION['user'] = $_POST['email'];
-    } else {
-        $response = array('msg' => 'fail');
+    } else if($login == 0){
+        $response = array('msg' => 'Bad Login');
+    } else if($login == -1) {
+        $response = array('msg' => 'DB Error');
     }
 } else {
-    $response = array('msg' => 'fail');
+    $response = array('msg' => 'Parameters not sent');
 }
 
 echo json_encode($response);

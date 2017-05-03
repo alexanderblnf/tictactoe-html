@@ -1,5 +1,29 @@
+@media screen and (min-width: 1224px){
+    html {
+        background: url('../img/login-bg.jpg') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+}
+
+@media screen and (max-width: 1223px){
+    html {
+        background: url('../img/material-portrait.jpg');
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+
+    .btn-divs {
+        margin-bottom: 15%;
+        margin-top: 15%;
+    }
+}
+
 body {
-    background-image: url('../img/login-bg.jpg');
     max-width: 100%;
     font-size: 1vw;
     overflow-x: hidden;
@@ -61,7 +85,7 @@ header {
         left: 25vw;
     }
 
-    #play-btn, #leader-btn, #admin-btn, #chat-btn {
+    #play-btn, #leader-btn, #admin-btn, #chat-btn, #contact-btn {
         font-size: 2.5vw;
     }
 
@@ -98,7 +122,7 @@ header {
         left: 17vw;
     }
 
-    #play-btn, #leader-btn, #admin-btn, #chat-btn {
+    #play-btn, #leader-btn, #admin-btn, #chat-btn, #contact-btn {
         font-size: 1.5vw;
     }
 
@@ -132,6 +156,8 @@ header {
 
 .btn-divs {
     max-width: 100%;
+    border-bottom: 1px solid black;
+    border-radius: 10px;
 }
 
 #logo-text {
@@ -218,8 +244,7 @@ header {
 }
 
 #play-div, #leader-div, #admin-div, #chat-div {
-    margin-top: 10%;
-    margin-bottom: 10%;
+    border-radius: 10px;
 }
 
 #logout-div {
@@ -249,4 +274,8 @@ ul {
     width: 100vw;
     font-size: 2em;
     color: white;
+}
+
+tr {
+    border-bottom: 1px solid slategray;
 }

@@ -4,7 +4,6 @@
         header("Location: login.html");
     }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +20,7 @@
     <link rel="stylesheet" type="text/css" href="../css/admin.css">
     <link rel="stylesheet" type="text/css" href="../css/loading-animation.css">
     <link rel="stylesheet" type="text/css" href="../css/chat.css">
+    <link rel="stylesheet" type="text/css" href="../css/contact.css">
 </head>
 <body>
 <div id="available-div">
@@ -41,7 +41,7 @@
     </div>
     <div id="logout-div">
         <button id="logout-btn" class="btn">
-            <i class="material-icons">power_settings_new</i>
+            <i class="material-icons" style="font-size: 2.5em;">power_settings_new</i>
         </button>
 
     </div>
@@ -63,6 +63,9 @@
         </div>
         <div class="btn-divs" id="chat-div">
             <button class="btn whole-button" id="chat-btn">Chat Room</button>
+        </div>
+        <div class="btn-divs" id="chat-div">
+            <button class="btn whole-button" id="contact-btn">Contact Us</button>
         </div>
     </div>
 </div>
@@ -108,4 +111,6 @@
 <script src="../js/index.js"></script>
 <script src="../js/render-table.js"></script>
 <script src="../js/game.js"></script>
+<script src="../js/chat.js"></script>
+<script src="../js/contact.js"></script>
 </html>

@@ -6,3 +6,9 @@
 .del-btn {
     background-color: transparent;
 }
+
+#del-icon:hover {
+    color: red;
+}
+
+

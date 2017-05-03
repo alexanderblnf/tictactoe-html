@@ -1,0 +1,97 @@
+@media screen and (min-width: 1224px) {
+    #contact-container {
+        margin-top: 20vh;
+        width: 50%;
+        height: 50%;
+        margin-left: 13vw;
+    }
+}
+
+@media screen and (max-width: 1223px) {
+    #contact-container {
+        margin-top: 10vh;
+        width: 80%;
+        height: 60%;
+    }
+}
+
+#contact-container {
+    box-shadow: 0 0 10px #000;
+    background-color: whitesmoke;
+}
+
+#contact-header {
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: 15%;
+    text-align: center;
+    padding-top: 2%;
+}
+
+#contact-body {
+    position: relative;
+    height: 20%;
+    width: 100%;
+}
+
+#contact-area-container {
+    height: 40%;
+}
+
+#contact-text {
+    height: 90%;
+    width: 80%;
+    border-radius: 10px;
+}
+
+#user-name-container {
+    height: 15%;
+    width: 100%;
+}
+
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+}
+
+.rating > .span-a {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+}
+
+.rating > .span-a:hover:before,
+.rating > .span-a:hover ~ .span-a:before {
+    color:  gold;
+    content: "\2605";
+    position: absolute;
+}
+
+.span-a {
+    text-decoration: none;
+}
+
+.span-a:hover {
+    color: gold;
+    text-decoration: none;
+}
+
+-span-a:active {
+    text-decoration: none;
+}
+
+#contact-send, #user-name-container, #contact-area-container {
+    text-align: center;
+    position: relative;
+    width: 100%;
+}
+
+.star-shape:before {
+    color: goldenrod;
+    content: "\2605";
+    position: absolute;
+}

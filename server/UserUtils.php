@@ -14,12 +14,12 @@ class UserUtils{
         $user = $query->findOneByEmail($email);
         if($user) {
             if (md5($password) == $user->getPassword()) {
-               return true;
+               return 1;
             } else {
-                return false;
+                return 0;
             }
         } else {
-            return false;
+            return -1;
         }
     }
 

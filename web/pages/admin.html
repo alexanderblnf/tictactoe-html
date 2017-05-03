@@ -10,8 +10,8 @@
         <table id="admin-table">
             <thead class="leader-head">
             <tr>
-                <th>E-mail</th>
                 <th>Name</th>
+                <th>E-mail</th>
                 <th>Admin</th>
                 <th>Ban</th>
             </tr>
@@ -48,7 +48,7 @@
 
                     });
                     var td = document.createElement('td');
-                    td.innerHTML = '<button id="del' + val['id'] + '" class="del-btn btn"><i class="material-icons">delete</i></button>'
+                    td.innerHTML = '<button id="del' + val['id'] + '" class="del-btn btn"><i class="material-icons" id="del-icon">delete</i></button>'
                     tr.appendChild(td);
                     tbody.appendChild(tr);
                 });
@@ -76,7 +76,7 @@
         request.done(function (resp) {
             var data = JSON.parse(resp);
             if(data.success){
-                location.reload();
+                $('#container-div').empty().load('admin.html');
             } else {
                 console.log(data.error);
             }

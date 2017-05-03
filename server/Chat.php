@@ -86,10 +86,18 @@ class Chat implements MessageComponentInterface
             } else {
                 $sum = 0;
             }
+            if($increment == 5){
+                echo $sum . " ";
+            }
+
             if ($sum == 4) {
                 return 1;
             }
         }
+        if($increment == 5) {
+            echo "\n";
+        }
+
 
         return 0;
     }
@@ -159,7 +167,7 @@ class Chat implements MessageComponentInterface
                 return -1;
             }
 
-            $limit = 20 + $i;
+            $limit = 20 + $i + 1;
 
             if ($this->assessLateral($i, $limit, $username, $side, 5)) {
                 $this->decideWin($from);

@@ -1,19 +1,20 @@
 <div id="chat-container">
     <div id="chat-header">
-
+        <span id="chat-header-title">Chat Room</span>
     </div>
     <div id="chat-content">
 
     </div>
     <div id="message-div">
-        <div id="input-chat">
-            <form>
-                <input id="message-input" type="text" placeholder="Type a message.." style="width: 100%;">
-            </form>
-        </div>
-        <div id="button-chat">
-            <button class="btn" id="send-btn">Send</button>
-        </div>
+        <form id="message-form">
+            <textarea id="message-input" type="text" placeholder="Type a message.." style="width: 100%;"></textarea>
+        </form>
+            <!--<div id="input-chat">-->
+            <!---->
+            <!--</div>-->
+            <!--<div id="button-chat">-->
+            <!--<button class="btn btn-success" id="send-message-btn">Send</button>-->
+            <!--</div>-->
 
 
     </div>
@@ -25,16 +26,18 @@
             type: 'retrieve-chat'
         };
         conn.send(JSON.stringify(data));
+
+        $(window).keydown(function (event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+                sendMessage();
+                return false;
+            }
+        });
+
     });
 
-    $('#send-btn').on('click', function () {
-        var message = $('#message-input').val();
-        if(message != null && message != "") {
-            var data = {
-                type: 'chat-message',
-                message: message
-            };
-            conn.send(JSON.stringify(data));
-        }
+    $('#send-message-btn').on('click', function () {
+        sendMessage();
     });
 </script>

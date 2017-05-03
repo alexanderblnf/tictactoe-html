@@ -1,7 +1,17 @@
-body {
-    background-image: url('../img/login-bg.jpg');
-    max-width: 100%;
-    overflow-x: hidden;
+@media screen and (min-width: 1224px){
+    body {
+        background: url('../img/login-bg.jpg');
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+}
+
+@media screen and (max-width: 1224px){
+    body {
+        background: url('../img/material-portrait.png');
+        max-width: 100%;
+        overflow-x: hidden;
+    }
 }
 
 @media screen and (max-width: 1223px) {

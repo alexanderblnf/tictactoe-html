@@ -20,6 +20,26 @@ function getSession(callback) {
     })
 }
 
+function showResult(value) {
+    $('#available-div').empty();
+    var available = document.getElementById('available-div');
+    var div = document.createElement('div');
+    div.className = 'result-div';
+    var image = document.createElement('img');
+    if(value == 'win') {
+        image.src = "../img/winner.png";
+    } else if(value == 'lose') {
+        image.src = "../img/loser.png";
+    } else {
+        console.log(value);
+    }
+    image.className = 'result-image';
+    div.appendChild(image);
+    available.appendChild(div);
+    $('#available-div').css('display', 'inline-flex');
+
+}
+
 function createSocket() {
     conn = new WebSocket('ws://192.168.0.101:8081');
     conn.onopen = function (e) {
@@ -78,7 +98,7 @@ function createSocket() {
             side = data.side;
             $('#available-div').hide();
         } else if(data.type == 'end') {
-            alert(data.value);
+            showResult(data.value);
         } else if(data.type == 'turn') {
             console.log(data.username);
             if(username == data.username) {
@@ -89,13 +109,13 @@ function createSocket() {
         } else if(data.type == 'retrieve-chat'){
             var array = data.array;
             array.forEach(function (val) {
-                var span = '<span class="text-message">' + val["user"] + ": " + val["message"] + '</span><br>';
+                var span = '<p class="text-message">' + val["user"] + ": " + val["message"] + '</p>';
                 console.log(span);
                 $('#chat-content').append(span);
             });
         } else if(data.type == 'chat-message') {
             console.log('Chat message');
-            var span = '<span class="text-message">' + data["user"] + ": " + data["message"] + '</span><br>';
+            var span = '<p class="text-message">' + data["user"] + ": " + data["message"] + '</p>';
             $('#chat-content').append(span);
         } else {
             console.log('Something went wrong');

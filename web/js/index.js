@@ -14,6 +14,10 @@ $('#chat-btn').on('click', function () {
     $('#container-div').empty().load('chat.html');
 });
 
+$('#contact-btn').on('click', function () {
+    $('#container-div').empty().load('contact.html');
+});
+
 $('#logout-btn').on('click', function () {
     var request = $.ajax({
         url: 'logout.php',
@@ -53,8 +57,8 @@ function openBar() {
        $('#menuBar-div').width('20vw');
        $('#menuButton-div').css('left','20vw');
    } else {
-       $('#menuBar-div').width('12vw');
-       $('#menuButton-div').css('left','12vw');
+       $('#menuBar-div').width('14vw');
+       $('#menuButton-div').css('left','14vw');
    }
 }
 
