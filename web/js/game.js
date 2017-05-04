@@ -24,7 +24,10 @@ function showResult(value) {
     $('#available-div').empty();
     var available = document.getElementById('available-div');
     var div = document.createElement('div');
-    div.className = 'result-div';
+    var span = document.createElement('span');
+    span.innerHTML = value;
+    span.id = 'result-span';
+    div.className = 'result-div animated fadeIn';
     var image = document.createElement('img');
     if(value == 'win') {
         image.src = "../img/winner.png";
@@ -35,7 +38,21 @@ function showResult(value) {
     }
     image.className = 'result-image';
     div.appendChild(image);
+
+    var br = document.createElement('br');
+    div.appendChild(br);
+    br = document.createElement('br');
+    div.appendChild(span);
+    div.appendChild(br);
+
+    var home = document.createElement('button');
+    home.innerHTML = 'Home';
+    home.id = 'home-btn';
+    home.className = 'btn btn-success';
+    div.appendChild(home);
+
     available.appendChild(div);
+
     $('#available-div').css('display', 'inline-flex');
 
 }
@@ -155,6 +172,10 @@ $(document).on('click', '.request-play', function () {
     conn.send(JSON.stringify(data));
 
     $('#loading-div').empty().load('loading-animation.html');
+});
+
+$(document).on('click', '#home-btn', function () {
+   location.reload();
 });
 
 function getAvailable() {
