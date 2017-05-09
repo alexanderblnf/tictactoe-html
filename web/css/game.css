@@ -97,7 +97,7 @@
     z-index: 1;
 }
 
-#available-div {
+#available-div, #aux-div {
     width: 100vw;
     height: 100vh;
     position: absolute;

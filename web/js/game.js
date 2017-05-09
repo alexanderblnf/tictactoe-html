@@ -17,7 +17,7 @@ function getSession(callback) {
     request.fail(function (jqXHR, textStatus, errorThrown) {
         console.log(textStatus + ' ' + errorThrown);
         callback();
-    })
+    });
 }
 
 function showResult(value) {
@@ -31,10 +31,13 @@ function showResult(value) {
     var image = document.createElement('img');
     if(value == 'win') {
         image.src = "../img/winner.png";
+        image.alt = "winner"
     } else if(value == 'lose') {
         image.src = "../img/loser.png";
+        image.alt = "loser"
     } else {
-        console.log(value);
+        image.src = "../img/draw.png";
+        image.alt = "draw"
     }
     image.className = 'result-image';
     div.appendChild(image);
@@ -58,7 +61,7 @@ function showResult(value) {
 }
 
 function createSocket() {
-    conn = new WebSocket('ws://192.168.0.101:8081');
+    conn = new WebSocket('ws://localhost:8081');
     conn.onopen = function (e) {
         console.log("Connection established!");
         var data = {
@@ -91,8 +94,10 @@ function createSocket() {
             var img = document.createElement('img');
             if(side == 'x') {
                 img.src = 'http://vignette4.wikia.nocookie.net/wikichannel/images/a/a5/X.png/revision/latest?cb=20140406171754';
+                img.alt = 'x';
             } else {
                 img.src = 'http://www.freeiconspng.com/uploads/circle-png-8.png';
+                img.alt = 'o';
             }
 
             img.className = "img-overbutton";
@@ -104,8 +109,10 @@ function createSocket() {
             var img = document.createElement('img');
             if (side == 'o') {
                 img.src = 'http://vignette4.wikia.nocookie.net/wikichannel/images/a/a5/X.png/revision/latest?cb=20140406171754';
+                img.alt = 'o';
             } else {
                 img.src = 'http://www.freeiconspng.com/uploads/circle-png-8.png';
+                img.alt = 'x';
             }
 
             img.className = "img-overbutton";

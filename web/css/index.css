@@ -6,6 +6,31 @@
         -o-background-size: cover;
         background-size: cover;
     }
+
+    #user-span {
+        font-size: 1.2em;
+    }
+
+    .close-icon {
+        font-size: 1.5em;
+    }
+
+    #span-visited {
+        font-size: 2em;
+    }
+
+    #list-div {
+        font-size: 1.5em;
+    }
+
+    #available-span-div {
+        font-size: 1.7em;
+    }
+
+
+    td, th {
+        font-size: 1em;
+    }
 }
 
 @media screen and (max-width: 1223px){
@@ -17,9 +42,33 @@
         background-size: cover;
     }
 
+    #span-visited {
+        font-size: 5em;
+    }
+
+    td, th {
+        font-size: 2em;
+    }
+
+    #list-div {
+        font-size: 3em;
+    }
+
+    .close-icon {
+        font-size: 5em;
+    }
+
+    #available-span-div {
+        font-size: 3.5em;
+    }
+
     .btn-divs {
         margin-bottom: 15%;
         margin-top: 15%;
+    }
+
+    #user-span {
+        font-size: 2.5em;
     }
 }
 
@@ -85,7 +134,7 @@ header {
         left: 25vw;
     }
 
-    #play-btn, #leader-btn, #admin-btn, #chat-btn, #contact-btn {
+    #play-btn, #leader-btn, #admin-btn, #chat-btn, #contact-btn, #rules-btn {
         font-size: 2.5vw;
     }
 
@@ -122,7 +171,7 @@ header {
         left: 17vw;
     }
 
-    #play-btn, #leader-btn, #admin-btn, #chat-btn, #contact-btn {
+    #play-btn, #leader-btn, #admin-btn, #chat-btn, #contact-btn, #rules-btn {
         font-size: 1.5vw;
     }
 
@@ -243,7 +292,7 @@ header {
     font-size: 1.4em;
 }
 
-#play-div, #leader-div, #admin-div, #chat-div {
+#play-div, #leader-div, #admin-div, #chat-div, #contact-div, #rules-div {
     border-radius: 10px;
 }
 
@@ -261,7 +310,6 @@ header {
     position: absolute;
     top: 15vh;
     width: 100vw;
-    font-size: 2em;
 }
 
 ul {
@@ -278,4 +326,42 @@ ul {
 
 tr {
     border-bottom: 1px solid slategray;
+}
+
+#container-rules {
+    width: 50%;
+    position: absolute;
+    top: 20vh;
+    left: 15vw;
+}
+
+#get-pages {
+    border: none;
+    background: transparent;
+}
+
+#get-pages:focus {
+    outline: none;
+}
+
+#container-aux {
+    width: 100%;
+    height: 80%;
+    overflow: auto;
+}
+
+#pages-ul {
+    padding-left: 0 !important;
+}
+
+#close-aux {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    border: none;
+    background: transparent;
+}
+
+#close-aux:focus {
+    outline: none;
 }

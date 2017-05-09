@@ -7,3 +7,5 @@ session_start();
  * Time: 4:05 PM
  */
 unset($_SESSION['user']);
+unset($_SESSION['fullName']);
+unset($_SESSION['pages']);

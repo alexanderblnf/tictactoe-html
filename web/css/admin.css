@@ -7,7 +7,7 @@
     background-color: transparent;
 }
 
-#del-icon:hover {
+.del-icon:hover {
     color: red;
 }
 

@@ -6,15 +6,17 @@
  * Date: 4/16/2017
  * Time: 8:49 PM
  */
+class UserUtils
+{
 
-class UserUtils{
-
-    public function verifyLogin($email, $password) {
+    public function verifyLogin($email, $password)
+    {
         $query = new \Entities\UsersQuery();
         $user = $query->findOneByEmail($email);
-        if($user) {
+        if ($user) {
             if (md5($password) == $user->getPassword()) {
-               return 1;
+                $fullname = $user->getFirstname() . ' ' . $user->getLastname();
+                return $fullname;
             } else {
                 return 0;
             }
@@ -23,10 +25,11 @@ class UserUtils{
         }
     }
 
-    public function signup($email, $password, $firstname, $lastname) {
+    public function signup($email, $password, $firstname, $lastname)
+    {
         $query = new Entities\UsersQuery();
         $aux = $query->findOneByEmail($email);
-        if(!$aux) {
+        if (!$aux) {
             $user = new \Entities\Users();
             $user->setEmail($email);
             $user->setPassword(md5($password));
@@ -36,7 +39,7 @@ class UserUtils{
             $user->save();
 
             $aux2 = $query->findOneByEmail($email);
-            if($aux2) {
+            if ($aux2) {
                 $points = new \Entities\Leaderboard();
                 $points->setPoints(0);
                 $points->setWin(0);
@@ -53,7 +56,8 @@ class UserUtils{
         }
     }
 
-    public function winner($email) {
+    public function winner($email)
+    {
         $userQuery = new Entities\UsersQuery();
         $leaderboardQuery = new Entities\LeaderboardQuery();
 
@@ -64,7 +68,8 @@ class UserUtils{
         $leaderEntry->save();
     }
 
-    public function loser($email) {
+    public function loser($email)
+    {
         $userQuery = new Entities\UsersQuery();
         $leaderboardQuery = new Entities\LeaderboardQuery();
 
@@ -74,7 +79,8 @@ class UserUtils{
         $leaderEntry->save();
     }
 
-    public function draw($email) {
+    public function draw($email)
+    {
         $userQuery = new Entities\UsersQuery();
         $leaderboardQuery = new Entities\LeaderboardQuery();
 
@@ -84,7 +90,8 @@ class UserUtils{
         $leaderEntry->save();
     }
 
-    public function getLeaderboard($email) {
+    public function getLeaderboard($email)
+    {
         $leaders = \Entities\LeaderboardQuery::create()
             ->orderByPoints('DESC')
             ->find();
@@ -96,7 +103,7 @@ class UserUtils{
             $user = $userQuery->findPk($leader->getUserid());
             $aux = array();
             $pos++;
-            if($user->getEmail() == $email) {
+            if ($user->getEmail() == $email) {
                 $aux['this'] = true;
             }
             $aux['position'] = $pos;
@@ -110,11 +117,12 @@ class UserUtils{
         return $response;
     }
 
-    public function getUsers($email) {
+    public function getUsers($email)
+    {
         $userQuery = new Entities\UsersQuery();
         $user = $userQuery->findOneByEmail($email);
 
-        if($user->getPermission() == 1){
+        if ($user->getPermission() == 1) {
             $users = \Entities\UsersQuery::create()->find();
             $response = array();
             foreach ($users as $user) {
@@ -122,7 +130,7 @@ class UserUtils{
                 $aux['id'] = $user->getId();
                 $aux['name'] = $user->getFirstname() . " " . $user->getLastname();
                 $aux['email'] = $user->getEmail();
-                if($user->getPermission() == 1) {
+                if ($user->getPermission() == 1) {
                     $aux['permission'] = 'yes';
                 } else {
                     $aux['permission'] = 'no';
@@ -140,16 +148,17 @@ class UserUtils{
         return $response;
     }
 
-    public function deleteUser($id, $email) {
+    public function deleteUser($id, $email)
+    {
         $userQuery = new Entities\UsersQuery();
         $leaderQuery = new \Entities\LeaderboardQuery();
         $user = $userQuery->findOneById($id);
         $userQuery = new Entities\UsersQuery();
         $admin = $userQuery->findOneByEmail($email);
 
-        if($admin) {
-            if($admin->getPermission() == 1) {
-                if($user){
+        if ($admin) {
+            if ($admin->getPermission() == 1) {
+                if ($user) {
                     $leader = $leaderQuery->findOneByUserid($user->getId());
                     $user->delete();
                     $leader->delete();
